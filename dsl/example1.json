@@ -1,0 +1,16 @@
+{
+	"gadgets": [
+		{
+			"name": "string2int",
+			"public_inputs": [],
+			"private_inputs": [],
+			"outputs": []
+		}
+	],
+	"constraints": [
+		{
+			"value": "38002.1",
+			"constraint": "GT"
+		}
+	]
+}
