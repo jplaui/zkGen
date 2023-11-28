@@ -1,4 +1,4 @@
-package ledger_policy
+package dsl
 
 type Gadget struct {
 	Url         string `json:"url"`
@@ -12,7 +12,7 @@ type Constraint struct {
 	Constraint string `json:"constraint"`
 }
 
-type Proxy struct {
+type Statements struct {
 	Host      string `json:"host"`
 	Port      string `json:"port"`
 	Mode      string `json:"mode"`
@@ -23,5 +23,5 @@ type Proxy struct {
 type DSL struct {
 	APIs        []Gadget     `json:"gadgets"`
 	Constraints []Constraint `json:"constraints"`
-	Proxies     []Proxy      `json:"proxies"`
+	Proxies     []Statements `json:"proxies"`
 }

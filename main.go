@@ -10,18 +10,6 @@ import (
 	cmds "transpiler/commands"
 )
 
-func newVersionCommand() *cobra.Command {
-	cmd := &cobra.Command{
-		Use:   "version",
-		Short: "Print the version number of zkGen CMD toolkit.",
-		Run: func(cmd *cobra.Command, args []string) {
-			fmt.Println("zkGen version 0.1")
-		},
-	}
-
-	return cmd
-}
-
 func Commands() *cobra.Command {
 
 	// create new cobra command
@@ -37,6 +25,18 @@ func Commands() *cobra.Command {
 	cmd.AddCommand(cmds.PolicyTranspileCommand())
 	cmd.AddCommand(cmds.PolicyGetCommand())
 	cmd.AddCommand(cmds.PolicyListCommand())
+
+	return cmd
+}
+
+func newVersionCommand() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "version",
+		Short: "Print the version number of zkGen CMD toolkit.",
+		Run: func(cmd *cobra.Command, args []string) {
+			fmt.Println("zkGen version 0.1")
+		},
+	}
 
 	return cmd
 }

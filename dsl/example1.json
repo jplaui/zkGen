@@ -12,5 +12,11 @@
 			"value": "38002.1",
 			"constraint": "GT"
 		}
+	],
+	"statements": [
+		{
+			"value": "38002.1",
+			"constraint": "GT"
+		}
 	]
 }
