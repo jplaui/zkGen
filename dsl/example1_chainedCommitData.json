@@ -1,0 +1,35 @@
+{
+	"name": "zkPolicy_ageCheck",
+	"relations":[
+		{
+			"age": {
+				"type": "s-string",
+				"protection": {
+					"algorithm": "commitments:mimc",
+					"parameter": "message"
+				}
+			},
+			"number": {
+				"type": "p-integer"
+			}
+		},
+		{
+			"age": {
+				"type": "s-string",
+				"protection": {
+					"algorithm": "commitments:mimc",
+					"parameter": "message"
+				}
+			},
+			"number": {
+				"type": "p-integer"
+			}
+		}
+	],
+	"constraints": [
+		"0:age->-0:number",
+		"1:age-<-1:number",
+		"0:age:protection:algorithm:commit_string-=-s:1:age:protection:algorithm:commit_string",
+		"0:age:protection:algorithm:witness-=-s:1:age:protection:algorithm:witness"
+	]
+}

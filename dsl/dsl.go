@@ -1,27 +1,23 @@
 package dsl
 
-type Gadget struct {
-	Url         string `json:"url"`
-	ContentType string `json:"content-type"`
-	Pattern     string `json:"pattern"`
-	Creds       bool   `json:"creds"`
+type PrivateArgument struct {
+	Url string `json:"url"`
 }
 
-type Constraint struct {
-	Value      string `json:"value"`
-	Constraint string `json:"constraint"`
+type PublicArgument struct {
+	Value string `json:"value"`
 }
 
 type Statements struct {
-	Host      string `json:"host"`
-	Port      string `json:"port"`
-	Mode      string `json:"mode"`
-	PubKey    string `json:"pubKey"`
-	Algorithm string `json:"algorithm"`
+	Host string `json:"host"`
+}
+
+type ProtectionGadget struct {
+	Host string `json:"host"`
 }
 
 type DSL struct {
-	APIs        []Gadget     `json:"gadgets"`
-	Constraints []Constraint `json:"constraints"`
-	Proxies     []Statements `json:"proxies"`
+	APIs        []ProtectionGadget `json:"gadgets"`
+	Constraints []Statements       `json:"constraints"`
+	Proxies     []PublicArgument   `json:"proxies"`
 }

@@ -1,0 +1,23 @@
+{
+	"name": "zkPolicy_tls13keyCommit",
+	"relations":[
+        {
+			"key": {
+				"type": "s-string",
+                "size": 16,
+				"protection": {
+					"algorithm": "commitments:mimc",
+					"parameter": "message"
+				}
+			},
+            "commit": {
+                "type": "p-string",
+                "size": 32
+            }
+		}
+	],
+	"constraints": [
+        "0:key-=-secure_channel:sessionKey_TLS13AES128GCMSHA256:key",
+        "0:key:protection:algorithm:commit_string-=-0:commit"
+    ]
+}

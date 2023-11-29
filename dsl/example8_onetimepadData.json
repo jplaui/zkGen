@@ -1,0 +1,15 @@
+{
+	"name": "zkPolicy_ageCheck",
+	"statements":[
+		{
+			"constraint": "age->-22",  // key as private_arg - operator - comparator as public_arg
+			"age": {
+				"type": "s-string",
+				"protection": "encryption-otp_xor-message" 
+			},
+			"22": {
+				"type": "p-integer" // p - public makes protection obsolete
+			}
+		}
+	]
+}
