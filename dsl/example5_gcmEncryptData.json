@@ -1,0 +1,20 @@
+{
+	"name": "zkPolicy_ageCommitCheck",
+	"relations":[
+		{
+			"age": {
+				"type": "s-string",
+				"protection": {
+					"algorithm": "encryption:gcm_aes128",
+					"parameter": "plaintext"
+				}
+			},
+			"number": {
+				"type": "p-integer"
+			}
+		}
+	],
+	"constraints": [
+		"0:age->-0:number"
+	]
+}

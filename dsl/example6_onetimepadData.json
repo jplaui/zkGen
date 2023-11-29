@@ -5,8 +5,8 @@
 			"age": {
 				"type": "s-string",
 				"protection": {
-					"algorithm": "signatures:ecdsa",
-					"parameter": "message"
+					"algorithm": "encryption:otp_xor",
+					"parameter": "plaintext"
 				}
 			},
 			"number": {
