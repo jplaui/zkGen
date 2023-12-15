@@ -15,7 +15,7 @@
 _zkGen_ is in an early stage development and does not support API changes of supported secure computation frameworks. We make no guarantees that the generated circuits are secure. Make sure that any generated circuits undergone a security audit before using them in a production system or before using them to process sensitive/confidential data.
 
 ## Overview
-_zkGen_ is a decentralized oracle that doesn't rely on the trusted hardware and two-party computation. It allows users to prove the *provenance* of TLS records from a specific API and, in the meanwhile, prove the dynamic content fulfills a value constraint as pre-defined in a public policy in zero-knowledge.  It achieves confidentiality and integrity under certain honesty assumptions (e.g. honestly behaving proxy) which we define in the associated paper [HERMES](https://link-to-hermes.com). _zkGen_ relies on a proxy sitting between the client user and the server hosting the API. The TLS stack running on the server does not require any modifications, making _zkGen_ extendable to various existent APIs and web resources.
+_zkGen_ is a decentralized oracle that doesn't rely on the trusted hardware and two-party computation. It allows users to prove the *provenance* of TLS records from a specific API and, in the meanwhile, prove the dynamic content fulfills a value constraint as pre-defined in a public policy in zero-knowledge.  It achieves confidentiality and integrity under certain honesty assumptions (e.g. honestly behaving proxy) which we define in the associated paper [zkGen](https://github.com/anonsubsub/transpiler). _zkGen_ relies on a proxy sitting between the client user and the server hosting the API. The TLS stack running on the server does not require any modifications, making _zkGen_ extendable to various existent APIs and web resources.
 
 
 ## initial setup
@@ -53,19 +53,18 @@ We provide all details of how to execute _zkGen_ in different deployments in our
 
 ## Evaluation
 You can evaluate generated circuits via supported PETs frameworks. To do so, ... 
-To reproduce results provided in the research paper [HERMES](https://link-to-hermes.com), we provide an evaluation script [evaluation.sh](./evaluation.sh). The evaluation script can be executed by calling `./evaluation.sh` in the root location of this repository after installing the repository with the `./installation.sh` script as described [here](./docs/00_installation.md).
+To reproduce results provided in the research paper [zkGen](https://github.com/anonsubsub/transpiler), we provide an evaluation script [evaluation.sh](./evaluation.sh). The evaluation script can be executed by calling `./evaluation.sh` in the root location of this repository after installing the repository with the `./installation.sh` script as described [here](./docs/00_installation.md).
 
 
 ## Limitations 
 * The constraint system currently supported by _zkGen_ public policies is very limited with value proofs of float greater than `GT`, float less than `LT` and string equality `EQ` and will be extended in the future.
 
 ## Citing
-We welcome you to cite our [paper](https://link-to-hermes.com) if you are using _zkGen_ in academia.
+We welcome you to cite our [paper](https://github.com/anonsubsub/transpiler) if you are using _zkGen_ in academia.
 ```
-@inproceedings{2023zkGen,
+@inproceedings{les2023zkGen,
     author = {},
-    title = {zkGen: Transpiler Architecture to Generate
-Zero-knowledge Circuits},
+    title = {zkGen: Policy-to-Circuit Transpiler},
     year = {2023},
     publisher = {},
     booktitle = {},

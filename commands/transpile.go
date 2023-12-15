@@ -5,15 +5,83 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"log"
 	"os"
 	"strings"
+
+	"github.com/rs/zerolog/log"
 
 	"github.com/spf13/cobra"
 
 	lp "transpiler/dsl"
 	tp "transpiler/templates"
 )
+
+func PolicyGetCommand() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "policy-get",
+		Short: "returns public policy of according to provided filename.",
+		RunE: func(cmd *cobra.Command, args []string) error {
+
+			// check for config name as input argument
+			if len(args) < 1 {
+				return errors.New("provide policy filename without extension")
+			}
+			policyName := args[0]
+
+			// read config file
+			jsonFile, err := os.Open("dsl/" + policyName + ".json")
+			if err != nil {
+				log.Error().Err(err).Msg("os.Open()")
+				return err
+			}
+			defer jsonFile.Close()
+
+			// parse json
+			byteValue, _ := io.ReadAll(io.Reader(jsonFile))
+			var policyJson lp.ZkPolicy
+			json.Unmarshal(byteValue, &policyJson)
+
+			// pretty print json string
+			s, err := json.MarshalIndent(policyJson, "", "\t")
+			if err != nil {
+				log.Error().Err(err).Msg("json.MashalIndent()")
+				return err
+			}
+
+			// print to console
+			fmt.Print(string(s))
+			fmt.Println()
+
+			return nil
+		},
+	}
+
+	return cmd
+}
+
+func ParseLibraryCommand() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "lib-parse",
+		Short: "parse gadget library via filename.",
+		Run: func(cmd *cobra.Command, args []string) {
+
+			// read folder
+			files, err := os.ReadDir("./dsl")
+			if err != nil {
+				log.Error().Err(err).Msg("os.ReadDir()")
+			}
+
+			// print filename if not a directory
+			for _, file := range files {
+				if !file.IsDir() && strings.Contains(file.Name(), ".json") {
+					fmt.Println(strings.Split(file.Name(), ".json")[0])
+				}
+			}
+		},
+	}
+
+	return cmd
+}
 
 func PolicyTranspileCommand() *cobra.Command {
 	cmd := &cobra.Command{
@@ -30,24 +98,17 @@ func PolicyTranspileCommand() *cobra.Command {
 			policyName := args[0]
 			generatorFileName := args[1]
 
-			// start logger
-			f, start, err := StartLogging("policy-transpile")
-			if err != nil {
-				log.Println("StartLogging error", err)
-				return err
-			}
-
 			// read config file
 			jsonFile, err := os.Open("ledger_policy/" + policyName + ".json")
 			if err != nil {
-				log.Println("os.Open() error", err)
+				log.Error().Err(err).Msg("os.Open()")
 				return err
 			}
 			defer jsonFile.Close()
 
 			// parse json
 			byteValue, _ := io.ReadAll(io.Reader(jsonFile))
-			var policyJson lp.DSL
+			var policyJson lp.ZkPolicy
 			json.Unmarshal(byteValue, &policyJson)
 
 			// check configs
@@ -61,62 +122,12 @@ func PolicyTranspileCommand() *cobra.Command {
 			}
 
 			// run transpiler
-			t := tp.NewCircuit(generatorFileName, policyJson.Constraints[0].Constraint)
+			t := tp.NewCircuit(generatorFileName, policyJson.Constraints[0].String)
 			err = t.Transpile()
 			if err != nil {
-				log.Println("t.transpile error:", err)
+				log.Error().Err(err).Msg("t.Transpile()")
 				return err
 			}
-
-			// stop logger
-			err = StopLogging("policy-transpile", f, start)
-			if err != nil {
-				log.Println("StopLogging error", err)
-				return err
-			}
-
-			return nil
-		},
-	}
-
-	return cmd
-}
-
-func PolicyGetCommand() *cobra.Command {
-	cmd := &cobra.Command{
-		Use:   "policy-get",
-		Short: "returns public policy of according to provided filename.",
-		RunE: func(cmd *cobra.Command, args []string) error {
-
-			// check for config name as input argument
-			if len(args) < 1 {
-				return errors.New("provide policy filename without extension")
-			}
-			policyName := args[0]
-
-			// read config file
-			jsonFile, err := os.Open("ledger_policy/" + policyName + ".json")
-			if err != nil {
-				log.Println("os.Open() error", err)
-				return err
-			}
-			defer jsonFile.Close()
-
-			// parse json
-			byteValue, _ := io.ReadAll(io.Reader(jsonFile))
-			var policyJson lp.DSL
-			json.Unmarshal(byteValue, &policyJson)
-
-			// pretty print json string
-			s, err := json.MarshalIndent(policyJson, "", "\t")
-			if err != nil {
-				log.Println("json.MashalIndent() error:", err)
-				return err
-			}
-
-			// print to console
-			fmt.Print(string(s))
-			fmt.Println()
 
 			return nil
 		},
@@ -134,7 +145,7 @@ func PolicyListCommand() *cobra.Command {
 			// read folder
 			files, err := os.ReadDir("./dsl")
 			if err != nil {
-				log.Println("ioutil.ReadDir", err)
+				log.Error().Err(err).Msg("os.ReadDir()")
 			}
 
 			// print filename if not a directory

@@ -74,16 +74,16 @@ func (t *Circuit) Transpile() error {
 
 	// debug command output of compile
 	// log.Println("compile java generator, output:", string(out))
-	log.Println("java generator code has been compiled successfully.")
+	// log.Println("java generator code has been compiled successfully.")
 
-	// overwrite bin folder zk-build/jsnark
-	cmd2 := exec.Command("cp", "-r", "dependencies/jsnark-demo/JsnarkCircuitBuilder/bin", "prover/zksnark_build/jsnark")
-	cmd.Dir = "../"
-	if err := cmd2.Run(); err != nil {
-		log.Println("cmd2.Run() error:", err)
-		return err
-	}
-	log.Println("compiled generator code has been copied successfully to prover folder..")
+	// // overwrite bin folder zk-build/jsnark
+	// cmd2 := exec.Command("cp", "-r", "dependencies/jsnark-demo/JsnarkCircuitBuilder/bin", "prover/zksnark_build/jsnark")
+	// cmd.Dir = "../"
+	// if err := cmd2.Run(); err != nil {
+	// 	log.Println("cmd2.Run() error:", err)
+	// 	return err
+	// }
+	// log.Println("compiled generator code has been copied successfully to prover folder..")
 
 	return nil
 }

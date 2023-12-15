@@ -15,7 +15,7 @@
             }
 		}
 	],
-    "extra_constraints": [
+    "constraints": [
         "0:value->-0:number",
         "0:value:protection:algorithm:key-=-commitments:mimc:message"
 	]
