@@ -2,15 +2,18 @@
     "commitments": {
 		"mimc": {
 			"commit_string": {
-				"type": "p-string",
+                "scope": "public",
+				"type": "string",
                 "size": 32
 			},
 			"witness": { // xored with message, if no usage: use array of ones, same size as message
-                "type": "s-string", // string input fed as hex bytes
+                "scope": "private",
+                "type": "string", // string input fed as hex bytes
                 "size": -1 // -1 indicates unbound array
 			},
-            "message": { 
-                "type": "s-string",
+            "message": {
+                "scope": "private",
+                "type": "string",
                 "size": -1
             }
 		},

@@ -1,0 +1,33 @@
+package backup
+
+import (
+	"log"
+	"os/exec"
+)
+
+func (t *Circuit) GenSolidity() error {
+
+	// compile generator file
+	cmd := exec.Command("bash", "-c", "javac -d bin -cp /usr/share/java/junit4.jar:bcprov-jdk15on-159.jar $(find ./src/* | grep \".java$\")")
+	cmd.Dir = "dependencies/jsnark-demo/JsnarkCircuitBuilder/"
+	_, err := cmd.Output()
+	if err != nil {
+		log.Println("cmd.Run() error:", err)
+		return err
+	}
+
+	// debug command output of compile
+	// log.Println("compile java generator, output:", string(out))
+	// log.Println("java generator code has been compiled successfully.")
+
+	// // overwrite bin folder zk-build/jsnark
+	// cmd2 := exec.Command("cp", "-r", "dependencies/jsnark-demo/JsnarkCircuitBuilder/bin", "prover/zksnark_build/jsnark")
+	// cmd.Dir = "../"
+	// if err := cmd2.Run(); err != nil {
+	// 	log.Println("cmd2.Run() error:", err)
+	// 	return err
+	// }
+	// log.Println("compiled generator code has been copied successfully to prover folder..")
+
+	return nil
+}

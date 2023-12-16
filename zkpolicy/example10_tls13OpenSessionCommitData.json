@@ -2,21 +2,23 @@
 	"name": "zkPolicy_tls13openSessionCommit",
 	"relations":[
         {
-			"value": {
-				"type": "s-string",
+			"private_argument": {
+				"name": "value",
+				"type": "string",
                 "size": 16,
 				"protection": {
 					"algorithm": "secure_channels:openRecord_TLS13AES128GCMSHA256",
 					"parameter": "value"
 				}
 			},
-            "number": {
-                "type": "p-integer"
+            "public_argument": {
+				"name": "threshold",
+                "type": "integer"
             }
 		}
 	],
     "constraints": [
-        "0:value->-0:number",
+        "0:value->-0:threshold",
         "0:value:protection:algorithm:key-=-commitments:mimc:message"
 	]
 }

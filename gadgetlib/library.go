@@ -1,4 +1,4 @@
-package dsl
+package gadgetlib
 
 type CommitMIMC struct {
 	CommitString string `json:"commit_string"`

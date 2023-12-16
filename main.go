@@ -23,8 +23,13 @@ func Commands() *cobra.Command {
 
 	// transpiler
 	cmd.AddCommand(cmds.PolicyTranspileCommand())
-	cmd.AddCommand(cmds.PolicyGetCommand())
 	cmd.AddCommand(cmds.PolicyListCommand())
+
+	// zkpolicy
+	cmd.AddCommand(cmds.PolicyGetCommand())
+
+	// gadgetlib
+	cmd.AddCommand(cmds.ParseGadgetLibCommand())
 
 	return cmd
 }

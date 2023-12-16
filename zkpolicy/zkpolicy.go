@@ -1,4 +1,4 @@
-package dsl
+package zkpolicy
 
 import (
 	"encoding/json"
@@ -13,11 +13,13 @@ type Protection struct {
 }
 
 type PrivateArgument struct {
+	Name       string     `json:"name"`
 	Type       string     `json:"type"`
 	Protection Protection `json:"protection"`
 }
 
 type PublicArgument struct {
+	Name string `json:"name"`
 	Type string `json:"type"`
 	Size int    `json:"size"`
 }
@@ -32,9 +34,9 @@ type Constraint struct {
 }
 
 type ZkPolicy struct {
-	Name        string       `json:"name"`
-	Relations   []Relation   `json:"relations"`
-	Constraints []Constraint `json:"constraints"`
+	Name        string     `json:"name"`
+	Relations   []Relation `json:"relations"`
+	Constraints []string   `json:"constraints"`
 }
 
 func ParseZkPolicy(policyName string) (ZkPolicy, error) {
@@ -43,7 +45,7 @@ func ParseZkPolicy(policyName string) (ZkPolicy, error) {
 	var zkPolicy ZkPolicy
 
 	// read config file
-	jsonFile, err := os.Open("dsl/" + policyName + ".json")
+	jsonFile, err := os.Open("zkpolicy/" + policyName + ".json")
 	if err != nil {
 		log.Println("os.Open() error", err)
 		return zkPolicy, err
