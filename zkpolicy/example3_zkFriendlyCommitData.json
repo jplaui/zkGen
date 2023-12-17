@@ -1,9 +1,9 @@
 {
-	"name": "zkPolicy_ageCommitCheck",
+	"name": "AgeCommitCheck",
 	"relations":[
 		{
 			"private_argument": {
-				"name": "age",
+				"name": "Age",
 				"type": "string",
 				"protection": {
 					"algorithm": "commitments:mimc",
@@ -11,7 +11,7 @@
 				}
 			},
 			"public_argument": {
-				"name": "threshold",
+				"name": "Threshold",
 				"type": "integer"
 			}
 		}

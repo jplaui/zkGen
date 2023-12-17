@@ -30,9 +30,6 @@ func PolicyTranspileCommand() *cobra.Command {
 				return err
 			}
 
-			// check configs
-			// fmt.Println("config values:", zkPolicy)
-
 			// check if enough constraints in policy
 			if len(zkPolicy.Constraints) < 1 {
 				//log.Println("error: not enough constraints in selected policy.")
@@ -52,13 +49,6 @@ func PolicyTranspileCommand() *cobra.Command {
 			err = template.StoreCircuit()
 			if err != nil {
 				log.Error().Err(err).Msg("template.StoreCircuit()")
-				return err
-			}
-
-			// generate solidity
-			err = template.GenSolidity()
-			if err != nil {
-				log.Error().Err(err).Msg("template.GenSolidity()")
 				return err
 			}
 

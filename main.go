@@ -21,12 +21,15 @@ func Commands() *cobra.Command {
 	// version command
 	cmd.AddCommand(newVersionCommand())
 
+	// zkpolicy
+	cmd.AddCommand(cmds.PolicyGetCommand())
+
 	// transpiler
 	cmd.AddCommand(cmds.PolicyTranspileCommand())
 	cmd.AddCommand(cmds.PolicyListCommand())
 
-	// zkpolicy
-	cmd.AddCommand(cmds.PolicyGetCommand())
+	// testing
+	cmd.AddCommand(cmds.TestCircuitCommand()) // solidity flag to generate solidity code
 
 	// gadgetlib
 	cmd.AddCommand(cmds.ParseGadgetLibCommand())
