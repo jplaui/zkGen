@@ -1,3 +1,4 @@
+
 package circuits
 
 import (
@@ -10,15 +11,15 @@ import (
 // Circuit defines a pre-image knowledge proof
 // mimc(secret preImage) = public hash
 type MimcWrapper struct {
-	Age       []frontend.Variable
-	Witness   []frontend.Variable
-	Hash      frontend.Variable `gnark:",public"`
+	Age []frontend.Variable
+	Witness []frontend.Variable
+	Hash frontend.Variable `gnark:",public"`
 	Threshold frontend.Variable `gnark:",public"`
 }
 
 // Define declares the circuit's constraints
 func (circuit *MimcWrapper) Define(api frontend.API) error {
-
+	
 	mimc, _ := mimc.NewMiMC(api)
 
 	// rearrange input to match mimc input requirements
@@ -55,4 +56,5 @@ func (circuit *MimcWrapper) Define(api frontend.API) error {
 	api.AssertIsLessOrEqual(circuit.Threshold, sum)
 
 	return nil
-}
+}	
+		

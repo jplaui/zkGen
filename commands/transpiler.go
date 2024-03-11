@@ -2,6 +2,8 @@ package commands
 
 import (
 	"errors"
+	"fmt"
+	"time"
 
 	"github.com/rs/zerolog/log"
 
@@ -16,6 +18,8 @@ func PolicyTranspileCommand() *cobra.Command {
 		Use:   "zkpolicy-transpile",
 		Short: "transpiles policy and constraints into circuit.",
 		RunE: func(cmd *cobra.Command, args []string) error {
+
+			t1 := time.Now()
 
 			// check for input arguments
 			if len(args) < 1 {
@@ -51,6 +55,8 @@ func PolicyTranspileCommand() *cobra.Command {
 				log.Error().Err(err).Msg("template.StoreCircuit()")
 				return err
 			}
+
+			fmt.Println("transpilation took:", time.Since(t1))
 
 			return nil
 		},
