@@ -6,10 +6,10 @@
 				"type": "string",
                 "size": 32
 			},
-			"witness": { // xored with message, if no usage: use array of ones, same size as message
+			"witness": {
                 "scope": "private",
-                "type": "string", // string input fed as hex bytes
-                "size": -1 // -1 indicates unbound array
+                "type": "string",
+                "size": -1
 			},
             "message": {
                 "scope": "private",
